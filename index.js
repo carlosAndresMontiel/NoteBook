@@ -9,7 +9,7 @@ const App = express()
 App.use(cors())
 App.use(express.json())
 App.use('/notes', noteRouter)
-App.use('/category', categoryRouter)
+App.use('/categories', categoryRouter)
 
 try {
     Connection.authenticate()
