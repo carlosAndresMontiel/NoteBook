@@ -1,6 +1,7 @@
 import {DataTypes} from 'sequelize'
 import Connection from '../database/connection.js'
 
+
 const Note = Connection.define( 'notes',
     {
         title : DataTypes.STRING,
@@ -8,7 +9,7 @@ const Note = Connection.define( 'notes',
         example : DataTypes.TEXT,
         link : DataTypes.TEXT,
         visitedAt: DataTypes.DATE,
-        category_id : DataTypes.INTEGER
+        category_id: DataTypes.INTEGER,
     }
 )
 

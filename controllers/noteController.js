@@ -13,7 +13,8 @@ export const getNotes = async (req, res) => {
 
 export const getVisited = async (req, res) => {
     try {
-        const notes = await Note.findAll( {where: { visitedAt:{[Op.not]:null} }})//encontrar todos los registros que han sido visitados, con alguna fecha en visitedAt
+//encontrar todos los registros que han sido visitados, con alguna fecha en visitedAt distinta de null
+        const notes = await Note.findAll( {where: { visitedAt:{[Op.not]:null} }})
         res.json(notes)
     } catch (error) {
         res.json({message: error.message})
@@ -25,7 +26,7 @@ export const getNote = async (req, res) => {
         const note = await Note.findAll( {where: { id:req.params.id }})
         res.json(note[0])// entrega el registro solicitado
 
-        const now = new Date() // hora local
+        const now = new Date() // hora actual
         Note.update( {visitedAt: now}, {where: {id: req.params.id}} )// actualiza la fecha de visitado 
 
     } catch (error) {
