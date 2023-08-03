@@ -1,5 +1,6 @@
 import {DataTypes} from 'sequelize'
 import Connection from '../database/connection.js'
+import Category from './Category.js'
 
 
 const Note = Connection.define( 'notes',
@@ -12,5 +13,7 @@ const Note = Connection.define( 'notes',
         category_id: DataTypes.INTEGER,
     }
 )
+
+Note.belongsTo(Category, {foreignKey: 'category_id'})
 
 export default Note

@@ -7,8 +7,5 @@ const Category = Connection.define( 'categories',
     {
         name : DataTypes.STRING,
     })
-Category.hasMany(Note,{
-    foreignKey: 'category_id'
-})
 
 export default Category 
