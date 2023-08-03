@@ -46,8 +46,9 @@ export const getNote = async (req, res) => {
 
 export const createNote = async (req, res) => {
     try {
-        const note = await Note.create( req.body )
-        res.json(note)
+        const noteToCreate = await Note.create( req.body , {include: Category})
+        const createdNote = await Note.findByPk( noteToCreate.id , {include: Category})
+        res.json(createdNote)
     } catch (error) {
         res.json({message: error.message})
     }
@@ -55,7 +56,8 @@ export const createNote = async (req, res) => {
 
 export const updateNote = async (req, res) => {
     try {
-        const note = await Note.update( req.body, {where: {id: req.params.id}} )
+        await Note.update( req.body, {where: {id: req.params.id}} )
+        const note = await Note.findByPk(req.params.id, {include: Category})
         res.json(note)
     } catch (error) {
         res.json({message: error.message})
@@ -64,7 +66,7 @@ export const updateNote = async (req, res) => {
 
 export const deleteNote = async (req, res) => {
     try {
-        await Note.destroy( {where: {id:req.params.id}} )
+        await Note.destroy( {where: {id: req.params.id}} )
         res.json({message: "the note was deleted" })
     } catch (error) {
         res.json({message: error.message})
