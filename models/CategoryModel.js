@@ -1,4 +1,4 @@
-import Note from './Note.js'
+
 import {DataTypes} from 'sequelize'
 import Connection from '../database/connection.js'
 

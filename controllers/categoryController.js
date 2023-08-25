@@ -1,4 +1,4 @@
-import Category from '../models/Category.js'
+import Category from '../models/CategoryModel.js'
 
 export const getCategories = async (req, res) => {
 
@@ -39,9 +39,9 @@ export const updateCategory = async (req, res) => {
 
 export const deleteCategory = async (req, res) => {
     try {
-        await notes.destroy( {where: {id:req.params.id}} )
-        res.json({message: "the note was deleted" })
+        await Category.destroy( {where: {id:req.params.id}} )
+        res.json({message: "the category was deleted" })
     } catch (error) {
-        res.json({message: error.message})
+        res.json({message: 'This category cannot be deleted, it is been used by one or more notes'})
     }
 }

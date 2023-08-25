@@ -1,6 +1,6 @@
 import {DataTypes} from 'sequelize'
 import Connection from '../database/connection.js'
-import Category from './Category.js'
+import Category from './CategoryModel.js'
 
 
 const Note = Connection.define( 'notes',

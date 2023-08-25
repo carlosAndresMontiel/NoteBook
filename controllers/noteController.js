@@ -1,6 +1,7 @@
+
 import { Op } from 'sequelize'
-import Note from '../models/Note.js'
-import Category from '../models/Category.js'
+import Note from '../models/NoteModel.js'
+import Category from '../models/CategoryModel.js'
 
 export const getAllNotes = async(req, res) =>{
     try {
@@ -14,7 +15,30 @@ export const getAllNotes = async(req, res) =>{
 export const getNotes = async (req, res) => {
 
     try {
-        const allNotes = await Note.findAll({include: Category}, {where: { [req.params.fild]:{[Op.substring]: req.params.criteria }}})
+        const allNotes = await Note.findAll({
+            where: { 
+                [Op.or]: [
+                    {title: {[Op.substring]: req.params.criteria }},
+                    {content: {[Op.substring]: req.params.criteria }},
+                    {example: {[Op.substring]: req.params.criteria }}
+                ]
+            } ,
+            include: [{model: Category, required: true}]
+        })
+        res.json(allNotes)
+    } catch (error) {
+        res.json({message: error.message})
+    }
+}
+export const getNotesByCategory = async (req, res) => {
+
+    try {
+        const allNotes = await Note.findAll({
+            where: { 
+                category_id: req.params.criteria,
+            },
+            include: [{model: Category, required: true}]
+        })
         res.json(allNotes)
     } catch (error) {
         res.json({message: error.message})
@@ -24,7 +48,10 @@ export const getNotes = async (req, res) => {
 export const getVisited = async (req, res) => {
     try {
 //encontrar todos los registros que han sido visitados, con alguna fecha en visitedAt distinta de null
-        const notes = await Note.findAll({include: Category}, {where: { visitedAt:{[Op.not]:null} }})
+        const notes = await Note.findAll({
+            where: { visitedAt:{[Op.not]:null} },
+            include: [{model: Category, required: true}]
+        })
         res.json(notes)
     } catch (error) {
         res.json({message: error.message})
@@ -46,7 +73,7 @@ export const getNote = async (req, res) => {
 
 export const createNote = async (req, res) => {
     try {
-        const noteToCreate = await Note.create( req.body , {include: Category})
+        const noteToCreate = await Note.create( req.body)
         const createdNote = await Note.findByPk( noteToCreate.id , {include: Category})
         res.json(createdNote)
     } catch (error) {
