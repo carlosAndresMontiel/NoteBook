@@ -8,6 +8,7 @@ const App = express()
 
 App.use(cors())
 App.use(express.json())
+
 App.use('/notes', noteRouter)
 App.use('/categories', categoryRouter)
 
@@ -17,9 +18,5 @@ try {
 } catch (error) {
     console.log('cannot connecet at tihs moment')
 }
-
-App.get('/', (req, res) => {
-    res.send('hello world')
-})
 
 App.listen(8000, () => {console.log('Aplication is listening at http://localhost:8000')})

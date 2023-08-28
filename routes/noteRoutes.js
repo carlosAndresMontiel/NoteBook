@@ -1,7 +1,7 @@
-import  express from "express";
+import  Router from "express";
 import { getOneNote, createNote, updateNote, deleteNote, getNotesBySearchCriteria, getVisitedNotes, getAllNotes, getNotesByCategory} from '../controllers/NoteController.js'
 
-const NoteRoutes = express.Router()
+const NoteRoutes = Router()
 
 NoteRoutes.get('/all', getAllNotes)
 NoteRoutes.get('/bycategory/:criteria', getNotesByCategory)
