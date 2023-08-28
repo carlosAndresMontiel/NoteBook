@@ -1,15 +1,15 @@
 import  express from "express";
-import { getNote, createNote, updateNote, deleteNote, getNotes, getVisited, getAllNotes, getNotesByCategory} from '../controllers/noteController.js'
+import { getOneNote, createNote, updateNote, deleteNote, getNotesBySearchCriteria, getVisitedNotes, getAllNotes, getNotesByCategory} from '../controllers/NoteController.js'
 
-const noteRouter = express.Router()
+const NoteRoutes = express.Router()
 
-noteRouter.get('/all', getAllNotes)
-noteRouter.get('/bycategory/:criteria', getNotesByCategory)
-noteRouter.get('/byfields/:criteria', getNotes)
-noteRouter.get('/viewed',getVisited)
-noteRouter.get('/:id', getNote)
-noteRouter.post('/', createNote)
-noteRouter.put('/:id', updateNote)
-noteRouter.delete('/:id', deleteNote)
+NoteRoutes.get('/all', getAllNotes)
+NoteRoutes.get('/bycategory/:criteria', getNotesByCategory)
+NoteRoutes.get('/byfields/:criteria', getNotesBySearchCriteria)
+NoteRoutes.get('/viewed',getVisitedNotes)
+NoteRoutes.get('/:id', getOneNote)
+NoteRoutes.post('/', createNote)
+NoteRoutes.put('/:id', updateNote)
+NoteRoutes.delete('/:id', deleteNote)
 
-export default noteRouter
+export default NoteRoutes

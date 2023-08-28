@@ -1,9 +1,9 @@
 import {DataTypes} from 'sequelize'
-import Connection from '../database/connection.js'
-import Category from './CategoryModel.js'
+import dataBaseConnection from '../database/connection.js'
+import CategoryModel from './CategoryModel.js'
 
 
-const Note = Connection.define( 'notes',
+const NoteModel = dataBaseConnection.define( 'notes',
     {
         title : DataTypes.STRING,
         content : DataTypes.TEXT,
@@ -14,6 +14,6 @@ const Note = Connection.define( 'notes',
     }
 )
 
-Note.belongsTo(Category, {foreignKey: 'category_id'})
+NoteModel.belongsTo(CategoryModel, {foreignKey: 'category_id'})
 
-export default Note
+export default NoteModel

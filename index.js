@@ -1,7 +1,7 @@
 import express  from 'express'
-import noteRouter from './routes/noteRoutes.js'
-import categoryRouter from './routes/categoryRoutes.js'
-import Connection from './database/connection.js'
+import noteRouter from './routes/NoteRoutes.js'
+import categoryRouter from './routes/CategoryRoutes.js'
+import dataBaseConnection from './database/connection.js'
 import cors from 'cors'
 
 const App = express()
@@ -12,7 +12,7 @@ App.use('/notes', noteRouter)
 App.use('/categories', categoryRouter)
 
 try {
-    Connection.authenticate()
+    dataBaseConnection.authenticate()
     console.log('successfully connected')
 } catch (error) {
     console.log('cannot connecet at tihs moment')

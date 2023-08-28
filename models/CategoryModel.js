@@ -1,11 +1,11 @@
 
 import {DataTypes} from 'sequelize'
-import Connection from '../database/connection.js'
+import dataBaseConnection from '../database/connection.js'
 
 
-const Category = Connection.define( 'categories',
+const CategoryModel = dataBaseConnection.define( 'categories',
     {
         name : DataTypes.STRING,
     })
 
-export default Category 
+export default CategoryModel
