@@ -94,3 +94,15 @@ export const updateNote = async (req, res) => {
         res.json({error: error.message})
     }
 }
+
+export const deleteNote = async (req, res) => {
+    const noteIdToDelete = parseInt(req.params.id)
+    try{
+        const noteDeleted = await prisma.note.delete({
+            where: { id: noteIdToDelete }
+        })
+        res.json(noteDeleted)
+    }catch(error){
+        res.json({error: error.message})
+    }
+}
