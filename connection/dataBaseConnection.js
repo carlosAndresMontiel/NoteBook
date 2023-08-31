@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client"
 
+ const prisma = new PrismaClient()
 
-const prisma = new PrismaClient()
-
-const dataBaseConnection = prisma.$connect()
+ export const dataBaseConnection = prisma.$connect()

@@ -17,10 +17,11 @@ export const getAllNotes = async (req, res) => {
 
 export const getOneNote = async (req, res) => {
     const idToConsult = parseInt(req.params.id)
+    const now = new Date()
     try{
-        const note = await prisma.note.findFirst({
-            where: { id: idToConsult},
-            include: { category: true}
+        const note = await prisma.note.update({
+            where: { id: idToConsult },
+            data: { visitedAt: now }
         })
         res.json(note)
     }catch(error){
@@ -55,6 +56,40 @@ export const getNotesBySearchCriteria = async (req, res) => {
             include: {category: true}
         })
         res.json(notesBySearchCriteria)
+    }catch(error){
+        res.json({error: error.message})
+    }
+}
+
+export const getVisitedNotes = async (req, res) => {
+    try{
+        const visitedNotes = await prisma.note.findMany({
+            where: {visitedAt: {not: null}},
+            include: {category: true}
+        })
+        res.json(visitedNotes)
+    }catch(error){
+        res.json({error: error.message})
+    }
+} 
+
+export const createNote = async (req, res) => {
+    try{
+        const newNote = await prisma.note.create({data: req.body})
+        res.json(newNote)
+    }catch(error){
+        res.json({error: error.message})
+    }
+}
+
+export const updateNote = async (req, res) => {
+    const noteIdToUpdate = parseInt(req.params.id)
+    try{
+        const noteUpdated = await prisma.note.update({
+            where: { id: noteIdToUpdate },
+            data: req.body
+        })
+        res.json(noteUpdated)
     }catch(error){
         res.json({error: error.message})
     }
