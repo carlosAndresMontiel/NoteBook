@@ -1,25 +1,17 @@
 import express  from 'express'
-import noteRouter from './routes/NoteRoutes.js'
-import categoryRouter from './routes/CategoryRoutes.js'
-import dataBaseConnection from './database/connection.js'
 import cors from 'cors'
+import  'dotenv/config'
+
+import CategoryRouter from './routes/CategoryRoutes.js'
+import NoteRoutes from './routes/NoteRoutes.js'
+
+const PORT = process.env.PORT || 8000
 
 const App = express()
 
 App.use(cors())
 App.use(express.json())
-App.use('/notes', noteRouter)
-App.use('/categories', categoryRouter)
+App.use('/notes', NoteRoutes)
+App.use('/categories', CategoryRouter)
 
-try {
-    dataBaseConnection.authenticate()
-    console.log('successfully connected')
-} catch (error) {
-    console.log('cannot connecet at tihs moment')
-}
-
-App.get('/', (req, res) => {
-    res.send('hello world')
-})
-
-App.listen(8000, () => {console.log('Aplication is listening at http://localhost:8000')})
+App.listen( PORT, () => {console.log('Aplication is listening on port ' + PORT)})
