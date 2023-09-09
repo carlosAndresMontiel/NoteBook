@@ -75,8 +75,8 @@ export const getVisitedNotes = async (req, res) => {
 
 export const createNote = async (req, res) => {
     try{
-        const newNote = await prisma.note.create({data: req.body})
-        res.json(newNote)
+        //const newNote = await prisma.note.create({data: req.body})
+        res.json(req.body)
     }catch(error){
         res.json({error: error.message})
     }

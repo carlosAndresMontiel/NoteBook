@@ -1,1 +1,0 @@
-/* notes : id(int, not-null), title(string, not-null), content(text, not-null), example(text, null), link(text, null), visitedAt(date, null)  */

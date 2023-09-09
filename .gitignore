@@ -1,3 +1,11 @@
+# Archivos de configuración locales y credenciales sensibles
+.env
+.env.local
+.env.*.local
+.env.test
+.env.prod
+*.pem
+
 # Dependencias instaladas por npm o yarn
 node_modules/
 
@@ -11,14 +19,6 @@ logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Archivos de configuración locales y credenciales sensibles
-.env
-.env.local
-.env.*.local
-.env.test
-.env.prod
-*.pem
 
 # Archivos de respaldo de editores de texto
 *~
